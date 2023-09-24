@@ -1,9 +1,11 @@
 package com.coderscampus.api.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 	
 	@Entity
 	public class User {
@@ -18,6 +20,8 @@ import jakarta.persistence.Id;
 		private String lastName;
 		private String fullName;
 		private String password;
+		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+		private FarmDetails farmDetails;
 		
 		
 		public String getFullName() {
