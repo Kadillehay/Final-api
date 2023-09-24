@@ -6,18 +6,33 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 	
 	@Entity
-	public class Farm {
+	public class User {
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		private String id;
+		private Long id;
 		private String farmName;
 		private String product;
 		private String phoneNumber;
 		private String emailAddress;
 		private String firstName;
 		private String lastName;
+		private String fullName;
+		private String password;
 		
 		
+		public String getFullName() {
+			return fullName;
+		}
+		public void setFullName(String fullName) {
+			this.fullName = fullName;
+		}
+		
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
+		}
 		public String getFarmName() {
 			return farmName;
 		}
@@ -48,10 +63,10 @@ import jakarta.persistence.Id;
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
 		}
-		public String getId() {
+		public Long getId() {
 			return id;
 		}
-		public void setId(String id) {
+		public void setId(Long id) {
 			this.id = id;
 		}
 		public String getName() {

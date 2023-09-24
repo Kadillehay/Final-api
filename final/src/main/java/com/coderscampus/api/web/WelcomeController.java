@@ -5,16 +5,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coderscampus.api.domain.Farm;
+import com.coderscampus.api.domain.User;
 
 @RestController
 @CrossOrigin(origins="*")
 public class WelcomeController {
 
 	@GetMapping ("/welcome")
-	public ResponseEntity<Farm> welcome() {
+	public ResponseEntity<User> welcome() {
 
-		Farm farm = new Farm();
+		User farm = new User();
 		farm.setName("PhinFarm");
 		farm.setProduct("vergible");
 		
