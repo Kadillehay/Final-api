@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coderscampus.api.domain.FarmDetails;
+import com.coderscampus.api.domain.User;
 import com.coderscampus.api.repository.FarmDetailsRepository;
+import com.coderscampus.api.repository.FarmRegisterRepository;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -20,12 +22,22 @@ public class FarmDetailsController {
 	
 	@Autowired
 	private FarmDetailsRepository repository;
+	
+	@Autowired
+	private FarmRegisterRepository farmRegisterRepository;
 	@PostMapping("/send-details")
 	public ResponseEntity <FarmDetails> sendDetails(@RequestBody FarmDetails details){
 		FarmDetails newDetails = new FarmDetails();
 		BeanUtils.copyProperties(details, newDetails);
-		
+		User foundUser = farmRegisterRepository.findById(details.getUserId()).get();
+		foundUser.setFarmDetails(newDetails);
+		newDetails.setUser(foundUser);
 		repository.save(newDetails);
+		
+		
+		
+		
+		
 		return ResponseEntity.ok(newDetails);
 		
 		

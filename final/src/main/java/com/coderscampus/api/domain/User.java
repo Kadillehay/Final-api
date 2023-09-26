@@ -1,17 +1,21 @@
 package com.coderscampus.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 	
 	@Entity
 	public class User {
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		private Long id;
+		private Long userId;
 		private String farmName;
 		private String product;
 		private String phoneNumber;
@@ -20,10 +24,19 @@ import jakarta.persistence.OneToOne;
 		private String lastName;
 		private String fullName;
 		private String password;
+		
+		@JsonIgnore
 		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+		@PrimaryKeyJoinColumn
 		private FarmDetails farmDetails;
 		
 		
+		public FarmDetails getFarmDetails() {
+			return farmDetails;
+		}
+		public void setFarmDetails(FarmDetails farmDetails) {
+			this.farmDetails = farmDetails;
+		}
 		public String getFullName() {
 			return fullName;
 		}
@@ -68,10 +81,10 @@ import jakarta.persistence.OneToOne;
 			this.lastName = lastName;
 		}
 		public Long getId() {
-			return id;
+			return userId;
 		}
 		public void setId(Long id) {
-			this.id = id;
+			this.userId = id;
 		}
 		public String getName() {
 			return farmName;
