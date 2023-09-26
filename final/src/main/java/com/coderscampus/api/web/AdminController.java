@@ -29,6 +29,7 @@ public class AdminController {
 		User user = registerRepo.findById(userId).get();
 		FarmDetails details = repo.findByUser(user);
 		
+		
 		return ResponseEntity.ok(details);
 	}
 }

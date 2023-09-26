@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coderscampus.api.domain.User;
 import com.coderscampus.api.repository.FarmRegisterRepository;
+import com.coderscampus.api.service.UserService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -19,6 +20,8 @@ public class FarmRegistryController {
 	
 	@Autowired
 	FarmRegisterRepository farmRegisterRepo; 
+	@Autowired
+	UserService userService;
 
 	
 	@PostMapping("/register")
@@ -32,5 +35,13 @@ public class FarmRegistryController {
 		System.out.println("working?");
 		return ResponseEntity.ok(List.of(registered.getId(), registered.getFarmName()));
 	}
+	@PostMapping("/get-user")
+	public ResponseEntity<User> getUser(@RequestBody Long id){
+		return ResponseEntity.ok(userService.getUserById(id));
+	
+		
+	}
+	
+
 	
 }
