@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coderscampus.api.domain.User;
+import com.coderscampus.api.models.UserModel;
 import com.coderscampus.api.repository.FarmRegisterRepository;
 import com.coderscampus.api.service.UserService;
 
@@ -16,18 +17,19 @@ import com.coderscampus.api.service.UserService;
 public class LoginController {
 	@Autowired
 	FarmRegisterRepository farmRegisterRepo;
-	@Autowired
-	UserService userService;
+	
 
 	@PostMapping("/login")
-	public ResponseEntity<User> login(@RequestBody User user) {
+	public ResponseEntity<User> login(@RequestBody UserModel user) {
 		System.out.println(user.getEmailAddress());
-		User foundUser = farmRegisterRepo.findByEmailAddressAndPassword(user.getEmailAddress(), user.getPassword());
+		System.out.println(user.getPassword());
+		User foundUser = farmRegisterRepo.findUserByEmailAndPassword(user.getEmailAddress(), user.getPassword());
+		System.out.println(foundUser);
 		if (foundUser != null) {
-
 			return ResponseEntity.ok(foundUser);
 		}
 		return null;
+//		return null;
 
 	}
 

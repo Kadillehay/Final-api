@@ -104,6 +104,13 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 		public void setContactInfo(String contactInfo) {
 			this.phoneNumber = contactInfo;
 		}
+		@Override
+		public String toString() {
+			return "User [userId=" + userId + ", farmName=" + farmName + ", product=" + product + ", phoneNumber="
+					+ phoneNumber + ", emailAddress=" + emailAddress + ", firstName=" + firstName + ", lastName="
+					+ lastName + ", fullName=" + fullName + ", password=" + password + ", farmDetails=" + farmDetails
+					+ "]";
+		}
 
 		
 	}
