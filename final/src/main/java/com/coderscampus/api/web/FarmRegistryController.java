@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coderscampus.api.domain.User;
+import com.coderscampus.api.models.UserModel;
 import com.coderscampus.api.repository.FarmRegisterRepository;
 import com.coderscampus.api.service.UserService;
 
@@ -22,6 +23,7 @@ public class FarmRegistryController {
 	FarmRegisterRepository farmRegisterRepo; 
 	@Autowired
 	UserService userService;
+
 
 	
 	@PostMapping("/register")
