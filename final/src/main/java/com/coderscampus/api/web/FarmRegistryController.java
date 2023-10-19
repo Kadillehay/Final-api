@@ -1,6 +1,7 @@
 package com.coderscampus.api.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coderscampus.api.domain.User;
-import com.coderscampus.api.models.UserModel;
 import com.coderscampus.api.repository.FarmRegisterRepository;
 import com.coderscampus.api.service.UserService;
 
@@ -27,15 +27,14 @@ public class FarmRegistryController {
 
 	
 	@PostMapping("/register")
-	public ResponseEntity<List<Object>> submitRegister(@RequestBody User farmRegistry) {
+	public ResponseEntity<Map<String, User >> submitRegister(@RequestBody User farmRegistry) {
 		User user = new User();
 		BeanUtils.copyProperties(farmRegistry, user);
 		
 		
 		
 		User registered = farmRegisterRepo.save(user);
-		System.out.println("working?");
-		return ResponseEntity.ok(List.of(registered.getId(), registered.getFarmName()));
+		return ResponseEntity.ok(Map.of("id", registered));
 	}
 	@PostMapping("/get-user")
 	public ResponseEntity<User> getUser(@RequestBody Long id){
