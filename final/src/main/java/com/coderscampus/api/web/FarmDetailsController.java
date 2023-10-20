@@ -28,15 +28,37 @@ public class FarmDetailsController {
 	@PostMapping("/send-details")
 	public ResponseEntity <FarmDetails> sendDetails(@RequestBody FarmDetails details){
 		FarmDetails newDetails = new FarmDetails();
+	
 		BeanUtils.copyProperties(details, newDetails);
 		User foundUser = farmRegisterRepository.findById(details.getUserId()).get();
-		foundUser.setFarmDetails(newDetails);
-		newDetails.setUser(foundUser);
-		repository.save(newDetails);
+		FarmDetails foundFarmDetails = repository.findFarmDetailsByFarmName(details.getFarmName());
 		
 		
-		
-		
+		if(foundFarmDetails == null) {
+			
+			foundUser.setFarmDetails(newDetails);
+			newDetails.setUser(foundUser);
+			repository.save(newDetails);
+		} else {
+			foundFarmDetails.setApple(details.getApple());
+			foundFarmDetails.setBeef(details.getBeef());
+			foundFarmDetails.setBlueberry(details.getBlueberry());
+			foundFarmDetails.setBroccoli(details.getBroccoli());
+			foundFarmDetails.setButter(details.getButter());
+			foundFarmDetails.setCarrot(details.getCarrot());
+			foundFarmDetails.setCorn(details.getCorn());
+			foundFarmDetails.setCreams(details.getCreams());
+			foundFarmDetails.setEgg(details.getEgg());
+			foundFarmDetails.setMilk(details.getMilk());
+			foundFarmDetails.setMutton(details.getMutton());
+			foundFarmDetails.setPear(details.getPear());
+			foundFarmDetails.setPork(details.getPork());
+			
+			foundFarmDetails.setTomato(details.getTomato());
+			foundFarmDetails.setPoultry(details.getPoultry());
+			
+			repository.save(foundFarmDetails);
+		}
 		
 		return ResponseEntity.ok(newDetails);
 		
@@ -51,6 +73,7 @@ public class FarmDetailsController {
 		
 	}
 	
+
 
 	
 	
